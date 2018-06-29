@@ -1,10 +1,10 @@
 const Block = require('./block');
 
-class BlockChain{
+class Blockchain{
 
-    constructor(){
+    constructor() {
         this.chain = [Block.genesis()];
-    }
+      }
 
     addBlock(data){
 
@@ -30,11 +30,27 @@ class BlockChain{
                 }
                 
         }
-        return true;
+        return true; 
+
+    }
+
+    replaceChain(newChain){
+        //check if new chain is longer than the current chain
+        if(newChain.length <= this.chain.length){
+            console.log('Received chain is not longer than the current chain.');
+            return;
+        }else if(!this.isValidChain(newChain)){
+            console.log('The received chain is not valid.');
+            return;
+        }
+
+        console.log('Replacing blockChain with the new chain.');
+        this.chain = newChain;
+
 
     }
 
 
 }
 
-module.export = BlockChain;
+module.exports = Blockchain;
